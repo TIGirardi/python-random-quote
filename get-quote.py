@@ -5,7 +5,7 @@ def primary():
     quotes = f.readlines()
 
   rnd = random.randrange(len(quotes))
-  print(quotes[rnd])
+  print('>', quotes[rnd], end='')
 
 if __name__== "__main__":
   primary()
