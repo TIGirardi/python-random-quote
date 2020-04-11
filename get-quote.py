@@ -9,14 +9,22 @@ _, sys.stdout = sys.stdout, _
 _.close()
 
 
-def get_number():
+def parse_args():
   parser = argparse.ArgumentParser(description='Print a random quote')
   parser.add_argument('n', nargs='?', type=int, default=1,
                       help='number of quotes, negatives are treated as 0')
-  return parser.parse_args().n
+  parser.add_argument('-q', help='add quote to database')
+  return parser.parse_args()
 
 
 def primary():
+  args = parse_args()
+
+  new_quote = args.q
+  if new_quote:
+    with open('quotes.txt', mode='a') as f:
+      f.write(new_quote + '\n')
+
   n = get_number()
   if n <= 0:
     return
