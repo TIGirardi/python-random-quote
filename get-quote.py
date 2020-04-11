@@ -25,7 +25,7 @@ def primary():
     with open('quotes.txt', mode='a') as f:
       f.write(new_quote + '\n')
 
-  n = get_number()
+  n = args.n
   if n <= 0:
     return
 
