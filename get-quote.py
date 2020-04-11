@@ -8,12 +8,19 @@ import this
 _, sys.stdout = sys.stdout, _
 _.close()
 
-# def mk_parser():
-#   parser = argparse.ArgumentParser()
-#   parser.add_argument('number')
+
+def get_number():
+  parser = argparse.ArgumentParser(description='Print a random quote')
+  parser.add_argument('n', nargs='?', type=int, default=1,
+                      help='number of quotes, negatives are treated as 0')
+  return parser.parse_args().n
 
 
 def primary():
+  n = get_number()
+  if n <= 0:
+    return
+
   with open("quotes.txt") as f:
     quotes = [line.strip() for line in f.readlines()]
 
@@ -30,10 +37,8 @@ def primary():
   zen[7:9] = [zen_special]
 
   quotes += zen
-  n = len(quotes) - 1
 
-  rnd = random.randint(0, n)
-  print('>', quotes[rnd])
+  print('', *random.sample(quotes, n), sep='\n> ')
 
 if __name__== "__main__":
   primary()
